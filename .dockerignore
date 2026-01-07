@@ -1,0 +1,50 @@
+# Version Control
+.git
+.gitignore
+
+# IDEs and Editors
+.idea
+.vscode
+*.swp
+*.swo
+*.iml
+.DS_Store
+
+# Project Documentation & Notes
+docs/
+*.md
+.claude/
+.gemini-clipboard/
+
+# Local Environments & Logs
+.env
+.env.*
+env.example
+*.log
+logs/
+
+# Helper Scripts
+start.sh
+
+# Docker related (keep Dockerfile if you want it in context, but usually not needed inside)
+docker-compose.yml
+.dockerignore
+
+# --- Backend (Java/Maven) ---
+backend/target/
+**/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+backend/help.md
+
+# --- Frontend (Node/JS) ---
+# Crucial: Prevent copying local node_modules to build context
+frontend/node_modules/
+**/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/.env.*.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*

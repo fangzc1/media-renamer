@@ -1,0 +1,20 @@
+/* 卡片化布局统一样式 */
+
+/* 步骤容器 - 卡片化 (全局覆盖) */
+.step-container {
+  height: 100%;
+  flex: 1;
+  background-color: #ffffff !important; /* 纯白背景 */
+  border-radius: 16px; /* 大圆角 */
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.05); /* 精致阴影 */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* 确保子元素不超出圆角 */
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .step-container {
+  background-color: var(--bg-color-dark) !important;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
+}
+

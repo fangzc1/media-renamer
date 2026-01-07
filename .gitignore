@@ -1,0 +1,32 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+.mvn/
+mvnw
+mvnw.cmd
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Frontend
+node_modules/
+dist/
+.npm
+*.log
+
+# Environment
+.env
+.env.local
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml

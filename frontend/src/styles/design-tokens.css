@@ -1,0 +1,152 @@
+/**
+ * 设计 Token - 基于 "专业数据工坊" 设计理念
+ * 核心概念：精确、技术感、通透、结构化
+ */
+
+:root {
+  /* ==================== 背景色 (Backgrounds) ==================== */
+  --app-bg: #F8FAFC;          /* Slate-50: 极淡的冷灰色，非纯白，用于主背景 */
+  --surface-1: #FFFFFF;       /* White: 主内容卡片/表格背景 */
+  --surface-2: #F1F5F9;       /* Slate-100: 次级背景 (表头, 悬停) */
+
+  /* ==================== 边框 (Borders) ==================== */
+  --border-subtle: #E2E8F0;   /* Slate-200: 微妙边框 */
+  --border-focus: #CBD5E1;    /* Slate-300: 强调边框 */
+
+  /* ==================== 文本 (Text) ==================== */
+  --text-main: #0F172A;       /* Slate-900: 深蓝黑，主标题 */
+  --text-secondary: #475569;  /* Slate-600: 次级文本，正文 */
+  --text-tertiary: #94A3B8;   /* Slate-400: 辅助文本，标签 */
+
+  /* ==================== 品牌色 (Brand / Primary) ==================== */
+  --primary-brand: #1E88E5;   /* Blue-600: 项目标准蓝 */
+  --primary-surface: #F0F9FF; /* Sky-50: 极淡蓝背景 */
+  --primary-hover: #1976D2;   /* Blue-700: 悬停状态 */
+
+  /* ==================== 功能色 (Functional Colors) ==================== */
+  --success-text: #166534;    /* Green-700 */
+  --success-bg: #DCFCE7;      /* Green-100 */
+  --success-hover: #BBF7D0;   /* Green-200 */
+
+  --warning-text: #9A3412;    /* Orange-700 */
+  --warning-bg: #FFEDD5;      /* Orange-100 */
+  --warning-hover: #FED7AA;   /* Orange-200 */
+
+  --danger-text: #991B1B;     /* Red-700 */
+  --danger-bg: #FEE2E2;       /* Red-100 */
+  --danger-hover: #FECACA;    /* Red-200 */
+
+  /* ==================== 差异对比专用 (Diff Specifics) ==================== */
+  --diff-add-bg: #DCFCE7;     /* 新增/修改背景 (绿) */
+  --diff-add-text: #15803D;   /* 新增/修改文本 (深绿) */
+  --diff-del-bg: #FEE2E2;     /* 删除背景 (红) */
+  --diff-del-text: #B91C1C;   /* 删除文本 (深红) */
+
+  /* ==================== 阴影 (Shadows) ==================== */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-float: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-hover: 0 4px 12px rgba(30, 136, 229, 0.3);
+
+  /* ==================== 圆角 (Border Radius) ==================== */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  /* ==================== 间距 (Spacing) ==================== */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+
+  /* ==================== 字体 (Typography) ==================== */
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue',
+               'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+
+  /* ==================== 过渡 (Transitions) ==================== */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.4s ease;
+
+  /* ==================== 移动端专用 (Mobile Specific) ==================== */
+  /* 触控相关 */
+  --touch-target-min: 44px;           /* iOS 最小触控热区 */
+  --touch-target-comfortable: 48px;   /* 舒适触控热区 */
+
+  /* 移动端布局 */
+  --mobile-header-height: 56px;       /* 顶部导航高度 */
+  --mobile-bottom-bar-height: 72px;   /* 底部操作栏高度 */
+  --mobile-nav-height: 48px;          /* 步骤导航高度 */
+
+  /* 移动端间距 */
+  --mobile-gutter: 16px;              /* 页面边距 */
+  --mobile-card-gap: 12px;            /* 卡片间距 */
+  --mobile-section-gap: 24px;         /* 区块间距 */
+
+  /* 移动端字体 */
+  --mobile-font-xs: 12px;
+  --mobile-font-sm: 13px;
+  --mobile-font-base: 14px;
+  --mobile-font-lg: 16px;
+  --mobile-font-xl: 18px;
+  --mobile-font-2xl: 20px;
+
+  /* 移动端行高 */
+  --mobile-line-height-tight: 1.25;
+  --mobile-line-height-normal: 1.5;
+  --mobile-line-height-relaxed: 1.75;
+
+  /* 响应式断点 (用于 JS 检测) */
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-large: 1440px;
+}
+
+/* ==================== 深色模式 (Dark Mode) ==================== */
+[data-theme="dark"] {
+  /* 背景色 */
+  --app-bg: #0F172A;          /* Slate-900: 深色主背景 */
+  --surface-1: #1E293B;       /* Slate-800: 卡片背景 */
+  --surface-2: #334155;       /* Slate-700: 次级背景 */
+
+  /* 边框 */
+  --border-subtle: #334155;   /* Slate-700 */
+  --border-focus: #475569;    /* Slate-600 */
+
+  /* 文本 */
+  --text-main: #F1F5F9;       /* Slate-100: 主文本 */
+  --text-secondary: #CBD5E1;  /* Slate-300: 次级文本 */
+  --text-tertiary: #64748B;   /* Slate-500: 辅助文本 */
+
+  /* 品牌色 - 深色模式下稍微调亮 */
+  --primary-brand: #42A5F5;   /* Blue-400: 深色模式下稍亮 */
+  --primary-surface: #1E3A8A; /* Blue-900: 深色品牌背景 */
+  --primary-hover: #1E88E5;   /* Blue-600 */
+
+  /* 功能色 - 深色模式调整 */
+  --success-text: #4ADE80;    /* Green-400 */
+  --success-bg: #14532D;      /* Green-900 */
+  --success-hover: #166534;   /* Green-700 */
+
+  --warning-text: #FB923C;    /* Orange-400 */
+  --warning-bg: #7C2D12;      /* Orange-900 */
+  --warning-hover: #9A3412;   /* Orange-700 */
+
+  --danger-text: #F87171;     /* Red-400 */
+  --danger-bg: #7F1D1D;       /* Red-900 */
+  --danger-hover: #991B1B;    /* Red-700 */
+
+  /* 差异对比 */
+  --diff-add-bg: #14532D;     /* Green-900 */
+  --diff-add-text: #4ADE80;   /* Green-400 */
+  --diff-del-bg: #7F1D1D;     /* Red-900 */
+  --diff-del-text: #F87171;   /* Red-400 */
+
+  /* 阴影 - 深色模式使用更深的阴影 */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px -1px rgb(0 0 0 / 0.4);
+  --shadow-float: 0 10px 15px -3px rgb(0 0 0 / 0.6), 0 4px 6px -4px rgb(0 0 0 / 0.5);
+  --shadow-hover: 0 4px 12px rgba(66, 165, 245, 0.4);
+}

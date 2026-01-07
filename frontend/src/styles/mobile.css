@@ -1,0 +1,395 @@
+/**
+ * 移动端全局样式
+ * 包含移动端专用的布局、交互和优化样式
+ */
+
+/* ==================== 响应式工具类 ==================== */
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+/* ==================== 移动端布局 ==================== */
+@media (max-width: 768px) {
+  /* 禁用页面缩放 */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  /* 触控优化 */
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-touch-callout: none;
+  }
+
+  /* 安全区域适配 (iOS 刘海屏) */
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  /* 移动端容器 */
+  .mobile-container {
+    padding: 0 var(--mobile-gutter);
+  }
+
+  /* 移动端卡片 */
+  .mobile-card {
+    background: var(--surface-1);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--mobile-card-gap);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* 移动端按钮 */
+  .mobile-btn {
+    min-height: var(--touch-target-min);
+    padding: 12px 24px;
+    font-size: var(--mobile-font-base);
+    border-radius: var(--radius-md);
+    touch-action: manipulation;
+  }
+
+  /* 移动端输入框 */
+  .mobile-input {
+    min-height: var(--touch-target-min);
+    font-size: var(--mobile-font-base);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+  }
+
+  /* 移动端列表项 */
+  .mobile-list-item {
+    min-height: var(--touch-target-comfortable);
+    padding: var(--space-md) var(--mobile-gutter);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .mobile-list-item:active {
+    background-color: var(--surface-2);
+  }
+}
+
+/* ==================== 触控反馈 ==================== */
+@media (max-width: 768px) {
+  .touch-feedback {
+    transition: background-color 0.15s ease;
+  }
+
+  .touch-feedback:active {
+    background-color: var(--surface-2);
+  }
+
+  /* 选中状态 */
+  .touch-selected {
+    background-color: var(--primary-surface);
+    border-left: 3px solid var(--primary-brand);
+  }
+
+  /* 长按反馈 */
+  .touch-long-press {
+    animation: pulse 0.5s ease-out;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.98);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+/* ==================== 底部操作栏 ==================== */
+@media (max-width: 768px) {
+  .mobile-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: var(--mobile-bottom-bar-height);
+    background: var(--surface-1);
+    border-top: 1px solid var(--border-subtle);
+    padding: var(--space-md) var(--mobile-gutter);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    z-index: 100;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    /* 安全区域底部适配 */
+    padding-bottom: calc(var(--space-md) + env(safe-area-inset-bottom));
+  }
+
+  .mobile-bottom-bar .prev-btn {
+    flex: 1;
+    min-height: var(--touch-target-min);
+  }
+
+  .mobile-bottom-bar .next-btn {
+    flex: 2;
+    min-height: var(--touch-target-min);
+  }
+
+  /* 为底部操作栏预留空间 */
+  .has-mobile-bottom-bar {
+    padding-bottom: calc(var(--mobile-bottom-bar-height) + 16px);
+  }
+}
+
+/* ==================== 顶部导航 ==================== */
+@media (max-width: 768px) {
+  .mobile-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--mobile-header-height);
+    background: var(--surface-1);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 0 var(--mobile-gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 99;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  [data-theme="dark"] .mobile-header {
+    background-color: rgba(30, 41, 59, 0.9);
+  }
+}
+
+/* ==================== 滑动操作 ==================== */
+@media (max-width: 768px) {
+  .swipe-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .swipe-content {
+    position: relative;
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+
+  .swipe-actions {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: stretch;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+
+  .swipe-content.swiped {
+    transform: translateX(-120px);
+  }
+
+  .swipe-content.swiped ~ .swipe-actions {
+    transform: translateX(0);
+  }
+
+  .swipe-action-btn {
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: var(--mobile-font-sm);
+    border: none;
+    cursor: pointer;
+  }
+
+  .swipe-action-btn.primary {
+    background-color: var(--primary-brand);
+  }
+
+  .swipe-action-btn.danger {
+    background-color: var(--danger-text);
+  }
+}
+
+/* ==================== Bottom Sheet (底部抽屉) ==================== */
+@media (max-width: 768px) {
+  .bottom-sheet-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+  }
+
+  .bottom-sheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--surface-1);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    max-height: 90vh;
+    z-index: 1001;
+    transition: transform 0.3s ease;
+    transform: translateY(100%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bottom-sheet.visible {
+    transform: translateY(0);
+  }
+
+  .bottom-sheet-handle {
+    width: 40px;
+    height: 4px;
+    background: var(--border-focus);
+    border-radius: 2px;
+    margin: 12px auto 8px;
+    cursor: grab;
+  }
+
+  .bottom-sheet-header {
+    padding: var(--space-md) var(--mobile-gutter);
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bottom-sheet-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--mobile-gutter);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bottom-sheet-footer {
+    padding: var(--space-md) var(--mobile-gutter);
+    border-top: 1px solid var(--border-subtle);
+    background: var(--surface-2);
+  }
+}
+
+/* ==================== 加载状态优化 ==================== */
+@media (max-width: 768px) {
+  /* 骨架屏 */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--surface-2) 25%,
+      var(--border-subtle) 50%,
+      var(--surface-2) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    border-radius: var(--radius-sm);
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  .skeleton-text {
+    height: 16px;
+    margin-bottom: 8px;
+  }
+
+  .skeleton-card {
+    height: 80px;
+    margin-bottom: 12px;
+  }
+}
+
+/* ==================== 滚动优化 ==================== */
+@media (max-width: 768px) {
+  /* 平滑滚动 */
+  .mobile-scroll-container {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* 隐藏滚动条但保持功能 */
+  .mobile-scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-scroll-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ==================== 表单优化 ==================== */
+@media (max-width: 768px) {
+  /* 防止输入框缩放 */
+  input[type="text"],
+  input[type="number"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px; /* 防止 iOS 自动缩放 */
+  }
+
+  /* 移动端表单布局 */
+  .mobile-form-group {
+    margin-bottom: var(--space-lg);
+  }
+
+  .mobile-form-label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-size: var(--mobile-font-sm);
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .mobile-form-input {
+    width: 100%;
+    min-height: var(--touch-target-min);
+    padding: 12px 16px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    font-size: var(--mobile-font-base);
+    background: var(--surface-1);
+    color: var(--text-main);
+  }
+
+  .mobile-form-input:focus {
+    outline: none;
+    border-color: var(--primary-brand);
+    box-shadow: 0 0 0 3px var(--primary-surface);
+  }
+}

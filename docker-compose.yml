@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  media-renamer:
+    image: media-renamer:1.0
+    container_name: media-renamer
+    ports:
+      - "5000:8080"
+    volumes:
+      - /path/to/your/media:/data/media
+      - ./logs:/app/logs
+
+    environment:
+      - TMDB_API_KEY=${TMDB_API_KEY}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE:-prod}
+      - TZ=${TZ:-Asia/Shanghai}
+      - JAVA_OPTS=${JAVA_OPTS:--Xmx512m}
+
+      # --- 代理配置 (可选) ---
+      - PROXY_ENABLED=${PROXY_ENABLED:-false}
+      - PROXY_HOST=${PROXY_HOST:-host.docker.internal}
+      - PROXY_PORT=${PROXY_PORT:-7890}
+      - PROXY_TYPE=${PROXY_TYPE:-HTTP}
+      - PROXY_USERNAME=${PROXY_USERNAME:-}
+      - PROXY_PASSWORD=${PROXY_PASSWORD:-}
+
+    restart: unless-stopped
+
+    # 健康检查
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+    # 日志轮转配置
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

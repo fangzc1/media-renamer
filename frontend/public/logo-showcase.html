@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Renamer Logo 展示</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366F1;
+      --primary-light: #818CF8;
+      --primary-dark: #4F46E5;
+      --bg-light: #F8FAFC;
+      --bg-dark: #0F172A;
+      --card-light: #FFFFFF;
+      --card-dark: #1E293B;
+      --text-light: #0F172A;
+      --text-dark: #F1F5F9;
+      --border-light: #E2E8F0;
+      --border-dark: #334155;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: all 0.3s ease;
+      padding: 2rem;
+    }
+
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--border-light);
+    }
+
+    body.dark header {
+      border-color: var(--border-dark);
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      opacity: 0.7;
+      margin-bottom: 2rem;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--card-light);
+      border: 2px solid var(--border-light);
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    body.dark .theme-toggle {
+      background: var(--card-dark);
+      border-color: var(--border-dark);
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Card */
+    .card {
+      background: var(--card-light);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    body.dark .card {
+      background: var(--card-dark);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(99, 102, 241, 0.15);
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    /* Logo Display */
+    .logo-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .logo-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    }
+
+    .logo-container img {
+      max-width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Size Showcase */
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(99, 102, 241, 0.05);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .size-item:hover {
+      background: rgba(99, 102, 241, 0.1);
+      transform: scale(1.05);
+    }
+
+    .size-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Background Variations */
+    .bg-variations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .bg-variant {
+      padding: 2rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .bg-variant:hover {
+      transform: scale(1.05);
+    }
+
+    .bg-white { background: #FFFFFF; }
+    .bg-gray { background: #F1F5F9; }
+    .bg-dark { background: #1E293B; }
+    .bg-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+
+    /* Usage Section */
+    .usage-section {
+      background: var(--card-light);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    body.dark .usage-section {
+      background: var(--card-dark);
+    }
+
+    .code-block {
+      background: #0F172A;
+      color: #F1F5F9;
+      padding: 1.5rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    .code-block code {
+      color: #F1F5F9;
+    }
+
+    .highlight {
+      color: #818CF8;
+      font-weight: 600;
+    }
+
+    /* Info Box */
+    .info-box {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .info-box strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 3rem;
+      opacity: 0.7;
+      font-size: 0.875rem;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card, .usage-section {
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1>🎬 Media Renamer Logo</h1>
+      <p class="subtitle">专业的媒体文件重命名工具品牌标识系统</p>
+      <button class="theme-toggle" onclick="toggleTheme()">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">切换深色模式</span>
+      </button>
+    </header>
+
+    <!-- Main Logo Display -->
+    <div class="grid">
+      <!-- Light Theme Logo -->
+      <div class="card">
+        <h2>浅色模式 Logo</h2>
+        <div class="logo-display">
+          <div class="logo-container">
+            <img src="/logo.svg" alt="Media Renamer Logo" style="width: 300px;">
+          </div>
+          <div class="info-box">
+            <strong>文件路径:</strong>
+            <code>/logo.svg</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Theme Logo -->
+      <div class="card">
+        <h2>深色模式 Logo</h2>
+        <div class="logo-display">
+          <div class="logo-container" style="background: #1E293B;">
+            <img src="/logo-dark.svg" alt="Media Renamer Logo Dark" style="width: 300px;">
+          </div>
+          <div class="info-box">
+            <strong>文件路径:</strong>
+            <code>/logo-dark.svg</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- Favicon -->
+      <div class="card">
+        <h2>Favicon 图标</h2>
+        <div class="logo-display">
+          <div class="logo-container">
+            <img src="/favicon.svg" alt="Favicon" style="width: 120px;">
+          </div>
+          <div class="info-box">
+            <strong>文件路径:</strong>
+            <code>/favicon.svg</code><br>
+            <strong>用途:</strong> 浏览器标签页图标
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Size Variations -->
+    <div class="card">
+      <h2>📐 不同尺寸展示</h2>
+      <div class="size-grid">
+        <div class="size-item">
+          <img id="logo-16" src="/logo.svg" style="width: 16px; height: 16px;">
+          <span class="size-label">16×16</span>
+        </div>
+        <div class="size-item">
+          <img id="logo-32" src="/logo.svg" style="width: 32px; height: 32px;">
+          <span class="size-label">32×32</span>
+        </div>
+        <div class="size-item">
+          <img id="logo-48" src="/logo.svg" style="width: 48px; height: 48px;">
+          <span class="size-label">48×48</span>
+        </div>
+        <div class="size-item">
+          <img id="logo-64" src="/logo.svg" style="width: 64px; height: 64px;">
+          <span class="size-label">64×64</span>
+        </div>
+        <div class="size-item">
+          <img id="logo-128" src="/logo.svg" style="width: 128px; height: 128px;">
+          <span class="size-label">128×128</span>
+        </div>
+        <div class="size-item">
+          <img id="logo-256" src="/logo.svg" style="width: 256px; height: 256px;">
+          <span class="size-label">256×256</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Background Variations -->
+    <div class="card">
+      <h2>🎨 不同背景下的效果</h2>
+      <div class="bg-variations">
+        <div class="bg-variant bg-white">
+          <img id="logo-bg-1" src="/logo.svg" style="width: 120px;">
+        </div>
+        <div class="bg-variant bg-gray">
+          <img id="logo-bg-2" src="/logo.svg" style="width: 120px;">
+        </div>
+        <div class="bg-variant bg-dark">
+          <img id="logo-bg-3" src="/logo-dark.svg" style="width: 120px;">
+        </div>
+        <div class="bg-variant bg-gradient">
+          <img src="/logo-dark.svg" style="width: 120px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage Guide -->
+    <div class="usage-section">
+      <h2>💻 使用指南</h2>
+
+      <h3 style="margin-top: 2rem; color: var(--primary);">1. 在 Vue 项目中使用</h3>
+      <div class="code-block">
+<code><span class="highlight">&lt;template&gt;</span>
+  <span class="highlight">&lt;img</span>
+    :src="isDark ? '/logo-dark.svg' : '/logo.svg'"
+    alt="Media Renamer"
+    class="logo"
+  <span class="highlight">/&gt;</span>
+<span class="highlight">&lt;/template&gt;</span>
+
+<span class="highlight">&lt;script setup&gt;</span>
+import { ref } from 'vue'
+const isDark = ref(false)
+<span class="highlight">&lt;/script&gt;</span>
+
+<span class="highlight">&lt;style&gt;</span>
+.logo {
+  width: 200px;
+  height: auto;
+}
+<span class="highlight">&lt;/style&gt;</span></code>
+      </div>
+
+      <h3 style="margin-top: 2rem; color: var(--primary);">2. 配置 Favicon</h3>
+      <p style="margin: 1rem 0;">在 <code>frontend/index.html</code> 中添加：</p>
+      <div class="code-block">
+<code><span class="highlight">&lt;link</span> rel="icon" type="image/svg+xml" href="/favicon.svg"<span class="highlight">&gt;</span></code>
+      </div>
+
+      <h3 style="margin-top: 2rem; color: var(--primary);">3. 直接在 HTML 中使用</h3>
+      <div class="code-block">
+<code><span class="highlight">&lt;img</span> src="/logo.svg" alt="Media Renamer" width="200"<span class="highlight">&gt;</span></code>
+      </div>
+
+      <div class="info-box" style="margin-top: 2rem;">
+        <strong>✨ 设计特点</strong>
+        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+          <li>采用"文件转换"叙事性概念设计</li>
+          <li>完美匹配项目 Indigo 品牌色系</li>
+          <li>原生支持深色/浅色主题切换</li>
+          <li>纯矢量 SVG，支持任意缩放</li>
+          <li>优化后文件体积小于 5KB</li>
+        </ul>
+      </div>
+
+      <div class="info-box" style="margin-top: 1rem;">
+        <strong>📁 文件清单</strong>
+        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+          <li><code>frontend/public/logo.svg</code> - 浅色模式主 Logo</li>
+          <li><code>frontend/public/logo-dark.svg</code> - 深色模式主 Logo</li>
+          <li><code>frontend/public/favicon.svg</code> - 应用图标</li>
+          <li><code>frontend/public/logo-showcase.html</code> - 本展示页面</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Media Renamer Logo Design System © 2026</p>
+      <p style="margin-top: 0.5rem;">由 Claude Code 设计 · 采用现代 SVG 技术</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    function toggleTheme() {
+      const body = document.body;
+      const icon = document.getElementById('theme-icon');
+      const text = document.getElementById('theme-text');
+      const isDark = body.classList.toggle('dark');
+
+      // Update UI
+      icon.textContent = isDark ? '☀️' : '🌙';
+      text.textContent = isDark ? '切换浅色模式' : '切换深色模式';
+
+      // Update logo sources in size grid
+      const logoSource = isDark ? '/logo-dark.svg' : '/logo.svg';
+      document.querySelectorAll('[id^="logo-"]').forEach(img => {
+        if (!img.id.includes('bg')) {
+          img.src = logoSource;
+        }
+      });
+
+      // Update background variation logos
+      document.getElementById('logo-bg-1').src = logoSource;
+      document.getElementById('logo-bg-2').src = logoSource;
+
+      // Save preference
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    // Load saved theme
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        toggleTheme();
+      }
+    });
+  </script>
+</body>
+</html>
