@@ -41,17 +41,18 @@
           </el-icon>
         </el-button>
 
-        <!-- 展开/折叠按钮 (PC端) -->
-        <el-button-group v-if="groupedFiles.length > 0 && !batchMatching && !isMobile" size="default">
-          <el-button @click="expandAll">
-            <el-icon><Expand /></el-icon>
-            全部展开
-          </el-button>
-          <el-button @click="collapseAll">
-            <el-icon><Fold /></el-icon>
-            全部折叠
-          </el-button>
-        </el-button-group>
+        <!-- 展开/折叠切换按钮 (PC端) -->
+        <el-button
+          v-if="groupedFiles.length > 0 && !batchMatching && !isMobile"
+          class="toggle-expand-button"
+          @click="toggleExpandState"
+        >
+          <el-icon>
+            <Fold v-if="defaultExpanded" />
+            <Expand v-else />
+          </el-icon>
+          <span>{{ defaultExpanded ? '全部折叠' : '全部展开' }}</span>
+        </el-button>
       </div>
     </div>
 
@@ -831,6 +832,30 @@ const handleModifySeasonConfirm = (newSeason) => {
   display: flex;
   gap: var(--space-md);
   align-items: center; /* 确保垂直居中 */
+}
+
+/* PC端展开/折叠切换按钮 */
+.toggle-expand-button {
+  border: none;
+  background-color: rgba(30, 136, 229, 0.08); /* 极浅品牌色背景 */
+  color: var(--primary-color, #1E88E5); /* 品牌色文字 */
+  border-radius: 8px; /* 匹配移动端圆角风格 */
+  transition: all 0.2s;
+  padding: 8px 16px;
+  font-size: 14px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.toggle-expand-button:hover {
+  background-color: rgba(30, 136, 229, 0.15); /* Hover 加深 */
+  color: var(--primary-color-dark, #1976D2);
+}
+
+.toggle-expand-button:active {
+  background-color: rgba(30, 136, 229, 0.2); /* 点击时更深 */
 }
 
 /* ==================== 内容区域 ==================== */

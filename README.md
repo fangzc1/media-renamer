@@ -15,6 +15,28 @@ Media Renamer 是一个基于 Web 的智能媒体文件重命名工具，能够�
 - 📁 **自动归档** - 按照媒体类型自动组织目录结构
 - 🌓 **响应式设计** - 支持桌面端和移动端访问
 
+## 界面
+
+**pc端**
+
+![step1](./docs/imgs/pc/step1.png)
+
+![step2](./docs/imgs/pc/step2.png)
+
+![step3](./docs/imgs/pc/step3.png)
+
+![step4](./docs/imgs/pc/step4.png)
+
+**移动端**
+
+![step1](./docs/imgs/mobile/step1.png)
+
+![step2](./docs/imgs/mobile/step2.png)
+
+![step3](./docs/imgs/mobile/step3.png)
+
+![step4](./docs/imgs/mobile/step4.png)
+
 ## 🛠️ 技术栈
 
 ### 后端

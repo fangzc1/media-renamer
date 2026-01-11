@@ -74,7 +74,7 @@ const handleNext = () => {
   border-top: 1px solid var(--border-subtle);
   padding: var(--space-md) var(--mobile-gutter);
   display: flex;
-  align-items: center;
+  align-items: center; /* 确保按钮垂直居中对齐 */
   gap: var(--space-md);
   z-index: 100;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
@@ -85,14 +85,24 @@ const handleNext = () => {
 
 .prev-btn {
   flex: 1;
+  height: var(--touch-target-min);
   min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   font-size: var(--mobile-font-base);
   border-radius: var(--radius-md);
 }
 
 .next-btn {
   flex: 2;
+  height: var(--touch-target-min);
   min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   font-size: var(--mobile-font-base);
   font-weight: 600;
   border-radius: var(--radius-md);

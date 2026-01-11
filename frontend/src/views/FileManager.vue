@@ -448,7 +448,7 @@ onMounted(() => {
   flex-direction: column;
   background-color: var(--surface-1);
   border-left: 1px solid var(--border-subtle);
-  padding: var(--space-xl) var(--space-lg);
+  padding: var(--space-xl); /* 统一上下左右的 padding */
   z-index: 10;
 }
 
@@ -463,16 +463,29 @@ onMounted(() => {
   margin-top: var(--space-2xl); /* 与步骤条的间距 */
   display: flex;
   gap: var(--space-md); /* 按钮间距 */
+  align-items: stretch; /* 拉伸按钮高度一致 */
 }
 
 /* 上一步按钮 */
 .control-group .btn-prev {
   flex: 1; /* 1:2 比例 */
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0 8px; /* 添加适当的内边距，避免内容太挤 */
 }
 
 /* 下一步按钮 */
 .control-group .btn-next {
   flex: 2; /* 让下一步按钮更长，更易点击 */
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0 16px; /* 较大按钮使用较大的内边距 */
   font-weight: 600;
   box-shadow: var(--shadow-hover); /* 使用设计 token */
 }
