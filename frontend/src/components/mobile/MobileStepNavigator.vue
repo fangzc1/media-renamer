@@ -57,7 +57,8 @@ const currentStepTitle = computed(() => {
 const handleStepClick = (step) => {
   // 仅允许跳转到已完成的步骤
   if (props.allowJump && step.value < props.currentStep) {
-    emit('change', step.value)
+    // 传递索引（从 0 开始）而不是步骤值（从 1 开始）
+    emit('change', step.value - 1)
   }
 }
 </script>

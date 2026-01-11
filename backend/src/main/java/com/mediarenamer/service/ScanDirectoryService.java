@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mediarenamer.model.dto.ScanDirectoryDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import jakarta.annotation.PostConstruct;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,14 +25,21 @@ import java.util.stream.Collectors;
 @Service
 public class ScanDirectoryService {
 
-    private static final String CONFIG_FILE = System.getProperty("user.home") +
-            "/.media-renamer/scan-directories.json";
+    @Value("${config.scan-directories-file}")
+    private String configFilePath;
 
     private final ObjectMapper objectMapper;
 
     public ScanDirectoryService() {
         this.objectMapper = new ObjectMapper();
         this.objectMapper.registerModule(new JavaTimeModule());
+    }
+
+    /**
+     * 初始化后确保配置目录存在
+     */
+    @PostConstruct
+    public void init() {
         ensureConfigDirExists();
     }
 
@@ -38,7 +47,7 @@ public class ScanDirectoryService {
      * 确保配置目录存在
      */
     private void ensureConfigDirExists() {
-        File configFile = new File(CONFIG_FILE);
+        File configFile = new File(configFilePath);
         File configDir = configFile.getParentFile();
         if (!configDir.exists()) {
             boolean created = configDir.mkdirs();
@@ -53,7 +62,7 @@ public class ScanDirectoryService {
      */
     public List<ScanDirectoryDTO> getAllDirectories() {
         try {
-            File file = new File(CONFIG_FILE);
+            File file = new File(configFilePath);
             if (!file.exists()) {
                 return new ArrayList<>();
             }
@@ -184,7 +193,7 @@ public class ScanDirectoryService {
      */
     private void saveDirectories(List<ScanDirectoryDTO> directories) {
         try {
-            File file = new File(CONFIG_FILE);
+            File file = new File(configFilePath);
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, directories);
             log.debug("保存扫描目录配置: {} 个", directories.size());
         } catch (IOException e) {

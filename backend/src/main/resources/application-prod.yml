@@ -1,62 +1,6 @@
-# 后端配置 - 生产环境
-server:
-  port: 8080
-
-spring:
-  application:
-    name: media-renamer
-  web:
-    resources:
-      static-locations: file:/app/static/
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-
-# TMDB API 配置
-tmdb:
-  api-key: ${TMDB_API_KEY}
-  api-url: https://api.themoviedb.org/3
-  language: zh-CN
-  # 速率限制: 40 请求/10秒
-  rate-limit:
-    requests: 40
-    period: 10
-  # 连接超时配置（毫秒）
-  timeout:
-    connect: 10000
-    read: 30000
-
-# 代理配置（可选）
-proxy:
-  enabled: ${PROXY_ENABLED:true}
-  host: ${PROXY_HOST:host.docker.internal}
-  port: ${PROXY_PORT:7890}
-  type: ${PROXY_TYPE:HTTP}  # HTTP, SOCKS
-  # 认证配置（可选）
-  username: ${PROXY_USERNAME:}
-  password: ${PROXY_PASSWORD:}
-
-# 文件配置
-file:
-  # 支持的视频格式
-  video-extensions:
-    - mp4
-    - mkv
-    - avi
-    - mov
-    - wmv
-    - flv
-    - m4v
-    - ts
-    - rmvb
-  # 最大扫描深度
-  max-scan-depth: 10
-
 # 日志配置
 logging:
   level:
     com.mediarenamer: INFO
     org.springframework.web: WARN
-  file:
-    name: /app/logs/media-renamer.log
+

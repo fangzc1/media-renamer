@@ -245,12 +245,9 @@ const handlePrev = () => {
 }
 
 // 处理步骤跳转
-const handleStepJump = (step) => {
-  // 移动端步骤从 1 开始，需要转换为 0 开始的索引
-  const targetIndex = step - 1
-  // 简单的状态切换
-  // 因为数据状态都在 FileManager 这一层,切换 currentStep 不会丢失 videoFiles 等数据
-  currentStep.value = targetIndex
+const handleStepJump = (index) => {
+  // 统一接收从 0 开始的索引值（移动端和桌面端都已转换为索引）
+  currentStep.value = index
 }
 
 // 处理下一步

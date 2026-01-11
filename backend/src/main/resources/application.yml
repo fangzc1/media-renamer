@@ -4,10 +4,15 @@ server:
 spring:
   application:
     name: media-renamer
+  web:
+    resources:
+      static-locations: file:/app/static/
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  profiles:
+    active: prod
 
 # TMDB API 配置
 tmdb:
@@ -49,6 +54,11 @@ file:
   # 最大扫描深度
   max-scan-depth: 10
 
+# 配置文件存储路径
+config:
+  # 扫描目录配置文件路径
+  scan-directories-file: ${CONFIG_DIR:/app/config}/scan-directories.json
+
 # 日志配置
 logging:
   level:
@@ -56,3 +66,5 @@ logging:
     org.springframework.web: INFO
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: /app/logs/media-renamer.log
